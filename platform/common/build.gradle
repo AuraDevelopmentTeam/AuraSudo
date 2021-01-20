@@ -10,10 +10,6 @@ configurations {
 
 repositories {
     maven {
-        name "mikroskeem"
-        url "https://repo.wut.ee/repository/mikroskeem-repo"
-    }
-    maven {
         name "sponge"
         url "https://repo.spongepowered.org/maven"
     }
@@ -27,10 +23,9 @@ dependencies {
     }
 
     // Normal dependencies
+    api "org.slf4j:slf4j-api:${slf4j_version}"
     api "com.github.ben-manes.caffeine:caffeine:${caffeine_version}"
     api "org.spongepowered:configurate-hocon:${configurate_version}"
-    api "com.h2database:h2:${h2_version}"
-    api "com.zaxxer:HikariCP:${hikariCP_version}"
 
     // Shadow dependencies
     shadow("team.aura_dev.lib.multiplatformcore:MultiPlatformCore:${multiPlatformCore_version}") {
@@ -38,8 +33,6 @@ dependencies {
     }
 
     // Test dependencies
-    testImplementation "ch.vorburger.mariaDB4j:mariaDB4j:2.4.0"
-    testRuntimeOnly "org.mariadb.jdbc:mariadb-java-client:2.5.1"
     testRuntimeOnly "org.slf4j:slf4j-nop:${slf4j_version}"
 
     // SLF4J files
