@@ -1,0 +1,17 @@
+apply from: "../../GradleCommon/common.gradle"
+
+dependencies {
+    api project(":AuraSudo-common")
+
+    shadow(project(":AuraSudo-api")) {
+        transitive = false
+    }
+    shadow(project(":AuraSudo-common")) {
+        transitive = false
+    }
+}
+
+shadowJar {
+    relocate("${rootProject.baseGroup}.lib", "${rootProject.group}.lib")
+    relocate("licenses", "${rootProject.group}.shadow.licenses")
+}

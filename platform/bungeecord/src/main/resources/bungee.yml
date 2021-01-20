@@ -1,0 +1,7 @@
+name: ${name}
+id: ${id}
+main: ${group}.platform.bungeecord.AuraSudoBungeeCordBootstrap
+version: ${version}
+author: BrainStone
+description: ${description}
+url: https://github.com/AuraDevelopmentTeam/AuraSudo

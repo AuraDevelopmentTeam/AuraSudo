@@ -1,0 +1,34 @@
+apply from: "../../GradleCommon/common.gradle"
+
+configurations {
+    slf4j {
+        transitive = false
+    }
+}
+
+dependencies {
+    api project(":AuraSudo-common")
+
+    shadow(project(":AuraSudo-api")) {
+        transitive = false
+    }
+    shadow(project(":AuraSudo-common")) {
+        transitive = false
+    }
+
+    // SLF4J files
+    slf4j "org.slf4j:slf4j-api:${project(":AuraSudo-common").slf4j_version}"
+    slf4j "team.aura_dev.lib.slf4j-plugin.bungeecord:slf4j-plugin-bungeecord:${project(":AuraSudo-common").slf4jPlugin_version}:${project(":AuraSudo-common").slf4j_version}"
+}
+
+shadowJar {
+    relocate("${rootProject.baseGroup}.lib", "${rootProject.group}.lib")
+    relocate("licenses", "${rootProject.group}.shadow.licenses")
+
+    exclude "org/slf4j/*"
+
+    from(project.configurations.slf4j.files) {
+        into "org/slf4j"
+        rename '(.*).jar', '$1.zip'
+    }
+}
