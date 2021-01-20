@@ -128,9 +128,9 @@ public abstract class AuraSudoBase implements AuraSudoApi, AuraSudoBaseBootstrap
   // Generated with http://www.patorjk.com/software/taag/#p=display&f=Straight&t=AuraSudo
   private List<String> generateAsciiBanner() {
     return Arrays.asList(
-        "  §9            §6 __",
-        "  §9 /\\     _ _ §6(_     _| _    §9AuraSudo §6v" + VERSION,
-        "  §9/--\\|_|| (_|§6__)|_|(_|(_)   §8Proudly running on " + getFullPlatform(),
+        "  §b            §e __",
+        "  §b /\\     _ _ §e(_     _| _    §bAuraSudo §ev" + VERSION,
+        "  §b/--\\|_|| (_|§e__)|_|(_|(_)   §8Proudly running on " + getFullPlatform(),
         "");
   }
 }

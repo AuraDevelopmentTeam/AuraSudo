@@ -2,13 +2,12 @@ package team.aura_dev.aurasudo.platform.spigot.player;
 
 import java.util.UUID;
 import javax.annotation.Nonnull;
-import lombok.NonNull;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import team.aura_dev.aurasudo.platform.common.player.PlayerDataCommon;
 
 public class PlayerDataSpigot extends PlayerDataCommon {
-  public PlayerDataSpigot(@NonNull UUID uuid) {
+  public PlayerDataSpigot(@Nonnull UUID uuid) {
     super(uuid, getPlayerFromUUID(uuid).getName());
   }
 

@@ -4,11 +4,10 @@ import cn.nukkit.Server;
 import cn.nukkit.player.Player;
 import java.util.UUID;
 import javax.annotation.Nonnull;
-import lombok.NonNull;
 import team.aura_dev.aurasudo.platform.common.player.PlayerDataCommon;
 
 public class PlayerDataNukkit extends PlayerDataCommon {
-  public PlayerDataNukkit(@NonNull UUID uuid) {
+  public PlayerDataNukkit(@Nonnull UUID uuid) {
     super(uuid, getPlayerFromUUID(uuid).getName());
   }
 
