@@ -3,9 +3,6 @@ package team.aura_dev.aurasudo.platform.common;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -16,8 +13,8 @@ import team.aura_dev.aurasudo.platform.common.config.ConfigLoader;
 import team.aura_dev.aurasudo.platform.common.dependency.RuntimeDependencies;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 import team.aura_dev.lib.multiplatformcore.DependencyClassLoader;
-import team.aura_dev.lib.multiplatformcore.dependency.RuntimeDependency;
 import team.aura_dev.lib.multiplatformcore.download.DependencyDownloader;
+import team.aura_dev.lib.multiplatformcore.download.DependencyList;
 
 @SuppressFBWarnings(
     value = {"JLM_JSR166_UTILCONCURRENT_MONITORENTER", "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE"},
@@ -64,39 +61,18 @@ public abstract class AuraSudoBase implements AuraSudoApi, AuraSudoBaseBootstrap
     return getConfigDir().resolve(ID + ".conf");
   }
 
-  public Collection<RuntimeDependency> getEarlyDependencies() {
-    final List<RuntimeDependency> dependencies = new LinkedList<>();
-
+  public DependencyList getEarlyDependencies(DependencyList dependencyList) {
     // We need Configurate for the config
-    dependencies.add(RuntimeDependencies.CONFIGURATE_HOCON);
+    dependencyList.add(RuntimeDependencies.CONFIGURATE_HOCON);
 
-    // We don't need to download dependencies already present
-    dependencies.removeAll(getPlatformDependencies());
-
-    return dependencies;
+    return dependencyList;
   }
 
-  public Collection<RuntimeDependency> getDependencies() {
-    final List<RuntimeDependency> dependencies = new LinkedList<>();
-
+  public DependencyList getDependencies(DependencyList dependencyList) {
     // We need caffeine as a loading cache in several classes
-    dependencies.add(RuntimeDependencies.CAFFEINE);
+    dependencyList.add(RuntimeDependencies.CAFFEINE);
 
-    // We don't need to download dependencies already present
-    dependencies.removeAll(getPlatformDependencies());
-
-    return dependencies;
-  }
-
-  /**
-   * This method returns a {@link Collection} of all the dependencies that are already present on
-   * the target platform.<br>
-   * This allows making sure that they are not downloaded unnecessarily.
-   *
-   * @return a {@link Collection} of already present dependencies
-   */
-  public Collection<RuntimeDependency> getPlatformDependencies() {
-    return Collections.emptyList();
+    return dependencyList;
   }
 
   protected abstract PlayerManagerCommon generatePlayerManager();
@@ -119,7 +95,7 @@ public abstract class AuraSudoBase implements AuraSudoApi, AuraSudoBaseBootstrap
     }
 
     logger.info("Downloading early dependencies");
-    dependencyDownloader.downloadAndInjectInClasspath(getEarlyDependencies());
+    dependencyDownloader.downloadAndInjectInClasspath(getEarlyDependencies(new DependencyList()));
 
     configLoader = new ConfigLoader(this);
     configLoader.loadConfig();
@@ -138,7 +114,7 @@ public abstract class AuraSudoBase implements AuraSudoApi, AuraSudoBaseBootstrap
     logger.info("Initializing " + NAME + " Version " + VERSION);
 
     logger.info("Downloading dependencies");
-    dependencyDownloader.downloadAndInjectInClasspath(getDependencies());
+    dependencyDownloader.downloadAndInjectInClasspath(getDependencies(new DependencyList()));
 
     this.playerManager = generatePlayerManager();
 

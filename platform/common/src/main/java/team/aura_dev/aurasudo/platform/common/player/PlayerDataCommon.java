@@ -24,7 +24,7 @@ import team.aura_dev.aurasudo.api.player.PlayerData;
 public class PlayerDataCommon implements PlayerData {
   @NonNull protected final UUID uuid;
   @NonNull protected final String playerName;
-  @NonNull protected boolean sudoActive = false;
+  protected boolean sudoActive = false;
 
   /**
    * A nice name for the player.<br>
