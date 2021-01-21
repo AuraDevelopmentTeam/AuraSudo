@@ -26,6 +26,7 @@ dependencies {
     api "org.slf4j:slf4j-api:${slf4j_version}"
     api "com.github.ben-manes.caffeine:caffeine:${caffeine_version}"
     api "org.spongepowered:configurate-hocon:${configurate_version}"
+    api "net.luckperms:api:${luckPerms_version}"
 
     // Shadow dependencies
     shadow("team.aura_dev.lib.multiplatformcore:MultiPlatformCore:${multiPlatformCore_version}") {

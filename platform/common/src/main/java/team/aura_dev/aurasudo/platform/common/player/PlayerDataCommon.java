@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
+import team.aura_dev.aurasudo.api.AuraSudo;
 import team.aura_dev.aurasudo.api.player.PlayerData;
 
 /**
@@ -24,7 +25,7 @@ import team.aura_dev.aurasudo.api.player.PlayerData;
 public class PlayerDataCommon implements PlayerData {
   @NonNull protected final UUID uuid;
   @NonNull protected final String playerName;
-  protected boolean sudoActive = false;
+  protected int sudoLevel = 0;
 
   /**
    * A nice name for the player.<br>
@@ -38,12 +39,13 @@ public class PlayerDataCommon implements PlayerData {
     return playerName;
   }
 
-  @Override
-  public boolean getSudoActive() {
-    return sudoActive;
-  }
+  public void setSudoLevel(int sudoLevel) {
+    final int maxSudoLevel = AuraSudo.getApi().getMaxSudoLevel();
 
-  public void setSudoActive(boolean active) {
-    sudoActive = active;
+    if ((sudoLevel < 0) || (sudoLevel > maxSudoLevel))
+      throw new IllegalArgumentException(
+          "sudoLevel was " + sudoLevel + ". But must be between 0 and " + maxSudoLevel);
+
+    this.sudoLevel = sudoLevel;
   }
 }

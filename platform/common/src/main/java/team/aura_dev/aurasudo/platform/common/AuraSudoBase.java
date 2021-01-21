@@ -6,10 +6,12 @@ import java.util.Arrays;
 import java.util.List;
 import lombok.Getter;
 import lombok.SneakyThrows;
+import net.luckperms.api.LuckPermsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import team.aura_dev.aurasudo.api.AuraSudoApi;
 import team.aura_dev.aurasudo.platform.common.config.ConfigLoader;
+import team.aura_dev.aurasudo.platform.common.context.SudoContextCalculator;
 import team.aura_dev.aurasudo.platform.common.dependency.RuntimeDependencies;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 import team.aura_dev.lib.multiplatformcore.DependencyClassLoader;
@@ -121,7 +123,18 @@ public abstract class AuraSudoBase implements AuraSudoApi, AuraSudoBaseBootstrap
     logger.info("Registering Event Listeners");
     registerEventListeners();
 
+    logger.info("Registering Context with LuckPerms");
+    LuckPermsProvider.get()
+        .getContextManager()
+        .registerCalculator(new SudoContextCalculator(playerManager, getMaxSudoLevel()));
+
     // TODO
+  }
+
+  @Override
+  public int getMaxSudoLevel() {
+    // TODO: Read from config
+    return 2;
   }
 
   // Private helper methods

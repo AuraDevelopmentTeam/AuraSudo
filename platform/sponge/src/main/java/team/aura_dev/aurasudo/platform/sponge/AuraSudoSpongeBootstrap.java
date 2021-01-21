@@ -6,6 +6,7 @@ import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
+import org.spongepowered.api.plugin.Dependency;
 import org.spongepowered.api.plugin.Plugin;
 import team.aura_dev.aurasudo.platform.common.AuraSudoBaseBootstrap;
 import team.aura_dev.aurasudo.platform.common.AuraSudoBootstrapper;
@@ -16,7 +17,8 @@ import team.aura_dev.aurasudo.platform.common.AuraSudoBootstrapper;
     version = AuraSudoBootstrapper.VERSION,
     description = AuraSudoBootstrapper.DESCRIPTION,
     url = AuraSudoBootstrapper.URL,
-    authors = {AuraSudoBootstrapper.AUTHOR})
+    authors = {AuraSudoBootstrapper.AUTHOR},
+    dependencies = @Dependency(id = "luckperms"))
 public class AuraSudoSpongeBootstrap {
   private final AuraSudoBaseBootstrap bootstrappedPlugin;
 

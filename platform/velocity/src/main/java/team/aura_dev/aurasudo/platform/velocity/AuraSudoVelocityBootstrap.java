@@ -3,6 +3,7 @@ package team.aura_dev.aurasudo.platform.velocity;
 import com.google.inject.Inject;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
+import com.velocitypowered.api.plugin.Dependency;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
@@ -16,7 +17,8 @@ import team.aura_dev.aurasudo.platform.common.AuraSudoBootstrapper;
     version = AuraSudoBootstrapper.VERSION,
     description = AuraSudoBootstrapper.DESCRIPTION,
     url = AuraSudoBootstrapper.URL,
-    authors = {AuraSudoBootstrapper.AUTHOR})
+    authors = {AuraSudoBootstrapper.AUTHOR},
+    dependencies = @Dependency(id = "luckperms"))
 public class AuraSudoVelocityBootstrap {
   private final AuraSudoBaseBootstrap bootstrappedPlugin;
 

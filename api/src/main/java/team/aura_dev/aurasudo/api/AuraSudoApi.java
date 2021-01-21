@@ -11,4 +11,6 @@ public interface AuraSudoApi {
   public static final String AUTHOR = "The_BrainStone";
 
   public PlayerManager getPlayerManager();
+
+  public int getMaxSudoLevel();
 }

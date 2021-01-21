@@ -18,7 +18,7 @@ public interface PlayerData {
   @Nonnull
   public String getDisplayName();
 
-  public boolean getSudoActive();
+  public int getSudoLevel();
 
-  public void setSudoActive(boolean active);
+  public void setSudoLevel(int level);
 }

@@ -5,3 +5,5 @@ version: ${version}
 author: BrainStone
 description: ${description}
 url: https://github.com/AuraDevelopmentTeam/AuraSudo
+depends:
+  - LuckPerms
