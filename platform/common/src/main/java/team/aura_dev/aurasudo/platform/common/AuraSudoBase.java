@@ -3,6 +3,8 @@ package team.aura_dev.aurasudo.platform.common;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -15,6 +17,7 @@ import team.aura_dev.aurasudo.platform.common.context.SudoContextCalculator;
 import team.aura_dev.aurasudo.platform.common.dependency.RuntimeDependencies;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 import team.aura_dev.lib.multiplatformcore.DependencyClassLoader;
+import team.aura_dev.lib.multiplatformcore.dependency.RuntimeDependency;
 import team.aura_dev.lib.multiplatformcore.download.DependencyDownloader;
 import team.aura_dev.lib.multiplatformcore.download.DependencyList;
 
@@ -67,6 +70,9 @@ public abstract class AuraSudoBase implements AuraSudoApi, AuraSudoBaseBootstrap
     // We need Configurate for the config
     dependencyList.add(RuntimeDependencies.CONFIGURATE_HOCON);
 
+    // Don't load platform dependencies at all
+    getPlatformDependencies().forEach(dependencyList::deny);
+
     return dependencyList;
   }
 
@@ -74,7 +80,20 @@ public abstract class AuraSudoBase implements AuraSudoApi, AuraSudoBaseBootstrap
     // We need caffeine as a loading cache in several classes
     dependencyList.add(RuntimeDependencies.CAFFEINE);
 
+    // Don't load platform dependencies at all
+    getPlatformDependencies().forEach(dependencyList::deny);
+
     return dependencyList;
+  }
+
+  /**
+   * A list of dependencies that are on the platform and therefore need not be loaded.<br>
+   * By default this list is empty.
+   *
+   * @return A list of dependencies present on the platform
+   */
+  public Collection<RuntimeDependency> getPlatformDependencies() {
+    return Collections.emptyList();
   }
 
   protected abstract PlayerManagerCommon generatePlayerManager();

@@ -1,15 +1,18 @@
 package team.aura_dev.aurasudo.platform.sponge;
 
 import java.nio.file.Path;
+import java.util.Collection;
+import java.util.Collections;
 import org.spongepowered.api.Platform;
 import org.spongepowered.api.Sponge;
 import team.aura_dev.aurasudo.api.AuraSudo;
 import team.aura_dev.aurasudo.platform.common.AuraSudoBase;
+import team.aura_dev.aurasudo.platform.common.dependency.RuntimeDependencies;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 import team.aura_dev.aurasudo.platform.sponge.listener.PlayerEventListenerSponge;
 import team.aura_dev.aurasudo.platform.sponge.player.PlayerManagerSponge;
 import team.aura_dev.lib.multiplatformcore.DependencyClassLoader;
-import team.aura_dev.lib.multiplatformcore.download.DependencyList;
+import team.aura_dev.lib.multiplatformcore.dependency.RuntimeDependency;
 
 public class AuraSudoSponge extends AuraSudoBase {
   private final AuraSudoSpongeBootstrap plugin;
@@ -35,9 +38,9 @@ public class AuraSudoSponge extends AuraSudoBase {
   }
 
   @Override
-  public DependencyList getEarlyDependencies(DependencyList dependencyList) {
-    // Super only adds CONFIGURATE_HOCON, which we have
-    return dependencyList;
+  public Collection<RuntimeDependency> getPlatformDependencies() {
+    // Caffeine is outdated, else we could remove it as well
+    return Collections.singleton(RuntimeDependencies.CONFIGURATE_HOCON);
   }
 
   @Override
