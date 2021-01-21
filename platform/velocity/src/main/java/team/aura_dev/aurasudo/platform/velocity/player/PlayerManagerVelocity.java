@@ -21,6 +21,12 @@ public class PlayerManagerVelocity extends PlayerManagerCommon {
     return Optional.of(new PlayerDataCommon(uuid, server.getPlayer(uuid).get().getUsername()));
   }
 
+  @Nonnull
+  @Override
+  protected PlayerData generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
+    return new PlayerDataCommon(basePlayerData.getUuid(), basePlayerData.getPlayerName());
+  }
+
   @Override
   protected BasePlayerData nativePlayerToBasePlayerData(Object player)
       throws IllegalArgumentException {

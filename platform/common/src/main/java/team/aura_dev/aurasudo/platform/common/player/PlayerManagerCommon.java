@@ -24,6 +24,9 @@ public abstract class PlayerManagerCommon implements PlayerManager {
 
   protected abstract Optional<PlayerData> generatePlayerData(@Nonnull @NonNull UUID uuid);
 
+  @Nonnull
+  protected abstract PlayerData generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData);
+
   @SuppressFBWarnings(
       value = "NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE",
       justification = "SpotBugs is incorrect in this case")
@@ -36,8 +39,15 @@ public abstract class PlayerManagerCommon implements PlayerManager {
   public PlayerData fromNativePlayer(@Nonnull @NonNull Object player)
       throws IllegalArgumentException {
     final BasePlayerData playerData = nativePlayerToBasePlayerData(player);
+    final UUID uuid = playerData.getUuid();
+    Optional<PlayerData> data = playerCache.getIfPresent(uuid);
 
-    return getPlayerData(playerData.getUuid()).get();
+    if ((data != null) && data.isPresent()) return data.get();
+
+    data = Optional.of(generatePlayerData(playerData));
+    playerCache.put(uuid, data);
+
+    return data.get();
   }
 
   /**

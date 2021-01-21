@@ -15,6 +15,12 @@ public class PlayerManagerBungeeCord extends PlayerManagerCommon {
     return Optional.of(new PlayerDataBungeeCord(uuid));
   }
 
+  @Nonnull
+  @Override
+  protected PlayerData generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
+    return new PlayerDataBungeeCord(basePlayerData.getUuid(), basePlayerData.getPlayerName());
+  }
+
   @Override
   protected BasePlayerData nativePlayerToBasePlayerData(Object player)
       throws IllegalArgumentException {

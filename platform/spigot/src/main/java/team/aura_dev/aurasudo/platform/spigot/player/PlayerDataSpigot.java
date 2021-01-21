@@ -11,6 +11,10 @@ public class PlayerDataSpigot extends PlayerDataCommon {
     super(uuid, getPlayerFromUUID(uuid).getName());
   }
 
+  public PlayerDataSpigot(@Nonnull UUID uuid, @Nonnull String playerName) {
+    super(uuid, playerName);
+  }
+
   @Nonnull
   @Override
   public String getDisplayName() {

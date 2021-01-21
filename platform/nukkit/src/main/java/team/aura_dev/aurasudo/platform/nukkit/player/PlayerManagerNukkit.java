@@ -14,6 +14,12 @@ public class PlayerManagerNukkit extends PlayerManagerCommon {
     return Optional.of(new PlayerDataNukkit(uuid));
   }
 
+  @Nonnull
+  @Override
+  protected PlayerData generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
+    return new PlayerDataNukkit(basePlayerData.getUuid(), basePlayerData.getPlayerName());
+  }
+
   @Override
   protected BasePlayerData nativePlayerToBasePlayerData(Object player)
       throws IllegalArgumentException {

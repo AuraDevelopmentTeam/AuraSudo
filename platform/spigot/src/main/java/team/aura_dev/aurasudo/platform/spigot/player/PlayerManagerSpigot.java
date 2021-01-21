@@ -14,6 +14,12 @@ public class PlayerManagerSpigot extends PlayerManagerCommon {
     return Optional.of(new PlayerDataSpigot(uuid));
   }
 
+  @Nonnull
+  @Override
+  protected PlayerData generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
+    return new PlayerDataSpigot(basePlayerData.getUuid(), basePlayerData.getPlayerName());
+  }
+
   @Override
   protected BasePlayerData nativePlayerToBasePlayerData(Object player)
       throws IllegalArgumentException {

@@ -11,6 +11,10 @@ public class PlayerDataNukkit extends PlayerDataCommon {
     super(uuid, getPlayerFromUUID(uuid).getName());
   }
 
+  public PlayerDataNukkit(@Nonnull UUID uuid, @Nonnull String playerName) {
+    super(uuid, playerName);
+  }
+
   @Nonnull
   @Override
   public String getDisplayName() {

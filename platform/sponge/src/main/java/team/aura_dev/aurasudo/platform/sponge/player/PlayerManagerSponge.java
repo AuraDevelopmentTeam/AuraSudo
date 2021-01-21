@@ -15,6 +15,12 @@ public class PlayerManagerSponge extends PlayerManagerCommon {
     return Optional.of(new PlayerDataSponge(uuid));
   }
 
+  @Nonnull
+  @Override
+  protected PlayerData generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
+    return new PlayerDataSponge(basePlayerData.getUuid(), basePlayerData.getPlayerName());
+  }
+
   @Override
   protected BasePlayerData nativePlayerToBasePlayerData(Object player)
       throws IllegalArgumentException {
