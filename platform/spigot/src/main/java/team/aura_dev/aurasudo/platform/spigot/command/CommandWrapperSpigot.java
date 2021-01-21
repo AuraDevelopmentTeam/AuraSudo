@@ -5,9 +5,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import team.aura_dev.aurasudo.api.player.PlayerManager;
 import team.aura_dev.aurasudo.platform.common.command.BaseCommand;
+import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 
 public class CommandWrapperSpigot extends Command {
-  protected final PlayerManager playerManager;
+  protected final PlayerManagerCommon playerManager;
   protected final BaseCommand command;
 
   /**
@@ -17,7 +18,7 @@ public class CommandWrapperSpigot extends Command {
    *     objects
    * @param command The underlying {@link BaseCommand}
    */
-  public CommandWrapperSpigot(PlayerManager playerManager, BaseCommand command) {
+  public CommandWrapperSpigot(PlayerManagerCommon playerManager, BaseCommand command) {
     super(command.getBaseCommand(), "", "", command.getAliasesAsList());
     setPermission(command.COMMAND.getPermission());
 

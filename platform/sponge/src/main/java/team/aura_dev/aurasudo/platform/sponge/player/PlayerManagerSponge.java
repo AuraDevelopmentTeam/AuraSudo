@@ -6,18 +6,18 @@ import javax.annotation.Nonnull;
 import lombok.NonNull;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.profile.GameProfile;
-import team.aura_dev.aurasudo.api.player.PlayerData;
+import team.aura_dev.aurasudo.platform.common.player.PlayerDataCommon;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 
 public class PlayerManagerSponge extends PlayerManagerCommon {
   @Override
-  protected Optional<PlayerData> generatePlayerData(@Nonnull @NonNull UUID uuid) {
+  protected Optional<PlayerDataCommon> generatePlayerData(@Nonnull @NonNull UUID uuid) {
     return Optional.of(new PlayerDataSponge(uuid));
   }
 
   @Nonnull
   @Override
-  protected PlayerData generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
+  protected PlayerDataCommon generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
     return new PlayerDataSponge(basePlayerData.getUuid(), basePlayerData.getPlayerName());
   }
 

@@ -6,8 +6,8 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import lombok.Getter;
-import team.aura_dev.aurasudo.api.player.PlayerData;
 import team.aura_dev.aurasudo.platform.common.permission.Permission;
+import team.aura_dev.aurasudo.platform.common.player.PlayerDataCommon;
 
 public abstract class BaseCommand {
   public final Permission BASE;
@@ -40,6 +40,6 @@ public abstract class BaseCommand {
     return aliases.toArray(new String[] {});
   }
 
-  public abstract void execute(PlayerData player, String alias, Collection<String> arguments)
+  public abstract void execute(PlayerDataCommon player, String alias, List<String> arguments)
       throws CommandExecutionException;
 }

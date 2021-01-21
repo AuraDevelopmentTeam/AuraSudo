@@ -5,9 +5,10 @@ import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;
 import team.aura_dev.aurasudo.api.player.PlayerManager;
 import team.aura_dev.aurasudo.platform.common.command.BaseCommand;
+import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 
 public class CommandWrapperBungeeCord extends Command {
-  protected final PlayerManager playerManager;
+  protected final PlayerManagerCommon playerManager;
   protected final BaseCommand command;
 
   /**
@@ -17,7 +18,7 @@ public class CommandWrapperBungeeCord extends Command {
    *     objects
    * @param command The underlying {@link BaseCommand}
    */
-  public CommandWrapperBungeeCord(PlayerManager playerManager, BaseCommand command) {
+  public CommandWrapperBungeeCord(PlayerManagerCommon playerManager, BaseCommand command) {
     super(command.getBaseCommand(), command.COMMAND.getPermission(), command.getAliasesAsArray());
 
     this.playerManager = playerManager;

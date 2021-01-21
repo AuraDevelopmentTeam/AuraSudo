@@ -5,18 +5,18 @@ import java.util.Optional;
 import java.util.UUID;
 import javax.annotation.Nonnull;
 import lombok.NonNull;
-import team.aura_dev.aurasudo.api.player.PlayerData;
+import team.aura_dev.aurasudo.platform.common.player.PlayerDataCommon;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 
 public class PlayerManagerNukkit extends PlayerManagerCommon {
   @Override
-  protected Optional<PlayerData> generatePlayerData(@Nonnull @NonNull UUID uuid) {
+  protected Optional<PlayerDataCommon> generatePlayerData(@Nonnull @NonNull UUID uuid) {
     return Optional.of(new PlayerDataNukkit(uuid));
   }
 
   @Nonnull
   @Override
-  protected PlayerData generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
+  protected PlayerDataCommon generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
     return new PlayerDataNukkit(basePlayerData.getUuid(), basePlayerData.getPlayerName());
   }
 

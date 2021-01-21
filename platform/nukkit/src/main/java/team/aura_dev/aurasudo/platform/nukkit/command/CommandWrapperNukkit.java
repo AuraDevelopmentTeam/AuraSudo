@@ -6,9 +6,10 @@ import cn.nukkit.command.data.CommandData;
 import java.util.Arrays;
 import team.aura_dev.aurasudo.api.player.PlayerManager;
 import team.aura_dev.aurasudo.platform.common.command.BaseCommand;
+import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 
 public class CommandWrapperNukkit extends Command {
-  protected final PlayerManager playerManager;
+  protected final PlayerManagerCommon playerManager;
   protected final BaseCommand command;
 
   /**
@@ -18,7 +19,7 @@ public class CommandWrapperNukkit extends Command {
    *     objects
    * @param command The underlying {@link BaseCommand}
    */
-  public CommandWrapperNukkit(PlayerManager playerManager, BaseCommand command) {
+  public CommandWrapperNukkit(PlayerManagerCommon playerManager, BaseCommand command) {
     super(
         CommandData.builder(command.getBaseCommand())
             .addPermission(command.COMMAND.getPermission())

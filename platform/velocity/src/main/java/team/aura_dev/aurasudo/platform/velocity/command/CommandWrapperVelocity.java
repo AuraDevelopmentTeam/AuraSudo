@@ -5,9 +5,10 @@ import com.velocitypowered.api.command.CommandSource;
 import java.util.Arrays;
 import team.aura_dev.aurasudo.api.player.PlayerManager;
 import team.aura_dev.aurasudo.platform.common.command.BaseCommand;
+import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 
 public class CommandWrapperVelocity implements Command {
-  protected final PlayerManager playerManager;
+  protected final PlayerManagerCommon playerManager;
   protected final BaseCommand command;
 
   /**
@@ -17,7 +18,7 @@ public class CommandWrapperVelocity implements Command {
    *     objects
    * @param command The underlying {@link BaseCommand}
    */
-  public CommandWrapperVelocity(PlayerManager playerManager, BaseCommand command) {
+  public CommandWrapperVelocity(PlayerManagerCommon playerManager, BaseCommand command) {
     this.playerManager = playerManager;
     this.command = command;
   }

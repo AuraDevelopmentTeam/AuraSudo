@@ -6,18 +6,18 @@ import javax.annotation.Nonnull;
 import lombok.NonNull;
 import net.md_5.bungee.api.connection.PendingConnection;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
-import team.aura_dev.aurasudo.api.player.PlayerData;
+import team.aura_dev.aurasudo.platform.common.player.PlayerDataCommon;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 
 public class PlayerManagerBungeeCord extends PlayerManagerCommon {
   @Override
-  protected Optional<PlayerData> generatePlayerData(@Nonnull @NonNull UUID uuid) {
+  protected Optional<PlayerDataCommon> generatePlayerData(@Nonnull @NonNull UUID uuid) {
     return Optional.of(new PlayerDataBungeeCord(uuid));
   }
 
   @Nonnull
   @Override
-  protected PlayerData generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
+  protected PlayerDataCommon generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
     return new PlayerDataBungeeCord(basePlayerData.getUuid(), basePlayerData.getPlayerName());
   }
 

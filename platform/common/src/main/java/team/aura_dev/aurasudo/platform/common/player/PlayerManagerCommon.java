@@ -13,7 +13,7 @@ import team.aura_dev.aurasudo.api.player.PlayerData;
 import team.aura_dev.aurasudo.api.player.PlayerManager;
 
 public abstract class PlayerManagerCommon implements PlayerManager {
-  protected final LoadingCache<UUID, Optional<PlayerData>> playerCache;
+  protected final LoadingCache<UUID, Optional<PlayerDataCommon>> playerCache;
 
   protected PlayerManagerCommon() {
     playerCache =
@@ -22,25 +22,26 @@ public abstract class PlayerManagerCommon implements PlayerManager {
             .build(this::generatePlayerData);
   }
 
-  protected abstract Optional<PlayerData> generatePlayerData(@Nonnull @NonNull UUID uuid);
+  protected abstract Optional<PlayerDataCommon> generatePlayerData(@Nonnull @NonNull UUID uuid);
 
   @Nonnull
-  protected abstract PlayerData generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData);
+  protected abstract PlayerDataCommon generatePlayerData(
+      @Nonnull @NonNull BasePlayerData basePlayerData);
 
   @SuppressFBWarnings(
       value = "NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE",
       justification = "SpotBugs is incorrect in this case")
   @Override
-  public Optional<PlayerData> getPlayerData(@Nonnull @NonNull UUID uuid) {
+  public Optional<PlayerDataCommon> getPlayerData(@Nonnull @NonNull UUID uuid) {
     return playerCache.get(uuid);
   }
 
   @Override
-  public PlayerData fromNativePlayer(@Nonnull @NonNull Object player)
+  public PlayerDataCommon fromNativePlayer(@Nonnull @NonNull Object player)
       throws IllegalArgumentException {
     final BasePlayerData playerData = nativePlayerToBasePlayerData(player);
     final UUID uuid = playerData.getUuid();
-    Optional<PlayerData> data = playerCache.getIfPresent(uuid);
+    Optional<PlayerDataCommon> data = playerCache.getIfPresent(uuid);
 
     if ((data != null) && data.isPresent()) return data.get();
 

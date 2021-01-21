@@ -8,7 +8,6 @@ import java.util.UUID;
 import javax.annotation.Nonnull;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import team.aura_dev.aurasudo.api.player.PlayerData;
 import team.aura_dev.aurasudo.platform.common.player.PlayerDataCommon;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 
@@ -17,13 +16,13 @@ public class PlayerManagerVelocity extends PlayerManagerCommon {
   private final ProxyServer server;
 
   @Override
-  protected Optional<PlayerData> generatePlayerData(@Nonnull @NonNull UUID uuid) {
+  protected Optional<PlayerDataCommon> generatePlayerData(@Nonnull @NonNull UUID uuid) {
     return Optional.of(new PlayerDataCommon(uuid, server.getPlayer(uuid).get().getUsername()));
   }
 
   @Nonnull
   @Override
-  protected PlayerData generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
+  protected PlayerDataCommon generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
     return new PlayerDataCommon(basePlayerData.getUuid(), basePlayerData.getPlayerName());
   }
 

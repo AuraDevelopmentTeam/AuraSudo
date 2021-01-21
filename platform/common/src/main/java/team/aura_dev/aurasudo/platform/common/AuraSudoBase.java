@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import team.aura_dev.aurasudo.api.AuraSudoApi;
 import team.aura_dev.aurasudo.platform.common.command.BaseCommand;
+import team.aura_dev.aurasudo.platform.common.command.SudoCommand;
 import team.aura_dev.aurasudo.platform.common.config.ConfigLoader;
 import team.aura_dev.aurasudo.platform.common.context.SudoContextCalculator;
 import team.aura_dev.aurasudo.platform.common.dependency.RuntimeDependencies;
@@ -149,6 +150,9 @@ public abstract class AuraSudoBase implements AuraSudoApi, AuraSudoBaseBootstrap
     LuckPermsProvider.get()
         .getContextManager()
         .registerCalculator(new SudoContextCalculator(playerManager, getMaxSudoLevel()));
+
+    logger.info("Registering Context with LuckPerms");
+    registerCommand(new SudoCommand());
 
     // TODO
   }

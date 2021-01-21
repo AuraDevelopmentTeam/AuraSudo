@@ -14,7 +14,7 @@ public interface PlayerManager {
    * @return the data of the player associated with the passed UUID wrapped in an {@link Optional}.
    *     Or an empty Optional if the player does not exist.
    */
-  public Optional<PlayerData> getPlayerData(@Nonnull UUID uuid);
+  public Optional<? extends PlayerData> getPlayerData(@Nonnull UUID uuid);
 
   /**
    * Does the same as {@link #getPlayerData(UUID)} but returns the {@link PlayerData} object
