@@ -7,8 +7,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.model.user.User;
 import team.aura_dev.aurasudo.api.AuraSudo;
 import team.aura_dev.aurasudo.api.player.PlayerData;
+import team.aura_dev.aurasudo.platform.common.permission.Permission;
 
 /**
  * Simple class to represent players in a platform independent way.
@@ -23,6 +27,8 @@ import team.aura_dev.aurasudo.api.player.PlayerData;
 @Getter(onMethod = @__({@Nonnull}))
 @EqualsAndHashCode(of = "uuid")
 public class PlayerDataCommon implements PlayerData {
+  protected final LuckPerms luckPerms = LuckPermsProvider.get();
+
   @NonNull protected final UUID uuid;
   @NonNull protected final String playerName;
   protected int sudoLevel = 0;
@@ -47,5 +53,17 @@ public class PlayerDataCommon implements PlayerData {
           "sudoLevel was " + sudoLevel + ". But must be between 0 and " + maxSudoLevel);
 
     this.sudoLevel = sudoLevel;
+  }
+
+  public boolean hasPermission(Permission permission) {
+    final User user = luckPerms.getUserManager().getUser(uuid);
+
+    // Shouldn't happen, but let's essentially just ignore this instead of throwing exceptions
+    if (user == null) return false;
+
+    return user.getCachedData()
+        .getPermissionData()
+        .checkPermission(permission.getPermission())
+        .asBoolean();
   }
 }
