@@ -5,10 +5,14 @@ import java.util.Collection;
 import java.util.Collections;
 import org.spongepowered.api.Platform;
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.command.args.GenericArguments;
+import org.spongepowered.api.command.spec.CommandSpec;
 import team.aura_dev.aurasudo.api.AuraSudo;
 import team.aura_dev.aurasudo.platform.common.AuraSudoBase;
+import team.aura_dev.aurasudo.platform.common.command.BaseCommand;
 import team.aura_dev.aurasudo.platform.common.dependency.RuntimeDependencies;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
+import team.aura_dev.aurasudo.platform.sponge.command.CommandExecutorSponge;
 import team.aura_dev.aurasudo.platform.sponge.listener.PlayerEventListenerSponge;
 import team.aura_dev.aurasudo.platform.sponge.player.PlayerManagerSponge;
 import team.aura_dev.lib.multiplatformcore.DependencyClassLoader;
@@ -51,5 +55,17 @@ public class AuraSudoSponge extends AuraSudoBase {
   @Override
   protected void registerEventListeners() {
     Sponge.getEventManager().registerListeners(plugin, new PlayerEventListenerSponge(this));
+  }
+
+  @Override
+  protected void registerCommand(BaseCommand command) {
+    CommandSpec commandSpec =
+        CommandSpec.builder()
+            .permission(command.COMMAND.getPermission())
+            .arguments(GenericArguments.allOf(GenericArguments.string(CommandExecutorSponge.ARGS)))
+            .executor(new CommandExecutorSponge(playerManager, command))
+            .build();
+
+    Sponge.getCommandManager().register(plugin, commandSpec, command.getAliasesAsList());
   }
 }

@@ -1,0 +1,38 @@
+package team.aura_dev.aurasudo.platform.sponge.command;
+
+import org.spongepowered.api.command.CommandException;
+import org.spongepowered.api.command.CommandResult;
+import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.command.args.CommandContext;
+import org.spongepowered.api.command.spec.CommandExecutor;
+import org.spongepowered.api.text.Text;
+import team.aura_dev.aurasudo.api.player.PlayerManager;
+import team.aura_dev.aurasudo.platform.common.command.BaseCommand;
+
+public class CommandExecutorSponge implements CommandExecutor {
+  public static final Text ARGS = Text.of("args");
+
+  protected final PlayerManager playerManager;
+  protected final BaseCommand command;
+
+  /**
+   * Construct a new native command executor for the {@link BaseCommand}.
+   *
+   * @param playerManager The {@link PlayerManager} to convert native player objects into our player
+   *     objects
+   * @param command The underlying {@link BaseCommand}
+   */
+  public CommandExecutorSponge(PlayerManager playerManager, BaseCommand command) {
+    this.playerManager = playerManager;
+    this.command = command;
+  }
+
+  @Override
+  public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
+    // Sadly we don't know the alias being used, so we need to pass the base command
+    command.execute(
+        playerManager.fromNativePlayer(src), command.getBaseCommand(), args.getAll(ARGS));
+
+    return CommandResult.success();
+  }
+}

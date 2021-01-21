@@ -12,6 +12,7 @@ import net.luckperms.api.LuckPermsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import team.aura_dev.aurasudo.api.AuraSudoApi;
+import team.aura_dev.aurasudo.platform.common.command.BaseCommand;
 import team.aura_dev.aurasudo.platform.common.config.ConfigLoader;
 import team.aura_dev.aurasudo.platform.common.context.SudoContextCalculator;
 import team.aura_dev.aurasudo.platform.common.dependency.RuntimeDependencies;
@@ -99,6 +100,8 @@ public abstract class AuraSudoBase implements AuraSudoApi, AuraSudoBaseBootstrap
   protected abstract PlayerManagerCommon generatePlayerManager();
 
   protected abstract void registerEventListeners();
+
+  protected abstract void registerCommand(BaseCommand command);
 
   // ============================================================================================
   // Actual plugin functionality starts here

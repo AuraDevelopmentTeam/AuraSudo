@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
+import team.aura_dev.aurasudo.platform.common.command.BaseCommand;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 import team.aura_dev.lib.multiplatformcore.DependencyClassLoader;
 
@@ -39,6 +40,11 @@ public class AuraSudoTest extends AuraSudoBase {
 
   @Override
   protected void registerEventListeners() {
+    // TODO: Implement when needed
+  }
+
+  @Override
+  protected void registerCommand(BaseCommand command) {
     // TODO: Implement when needed
   }
 }

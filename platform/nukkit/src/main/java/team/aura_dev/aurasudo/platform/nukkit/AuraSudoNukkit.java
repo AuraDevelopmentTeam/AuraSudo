@@ -4,7 +4,9 @@ import cn.nukkit.Server;
 import java.nio.file.Path;
 import team.aura_dev.aurasudo.api.AuraSudo;
 import team.aura_dev.aurasudo.platform.common.AuraSudoBase;
+import team.aura_dev.aurasudo.platform.common.command.BaseCommand;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
+import team.aura_dev.aurasudo.platform.nukkit.command.CommandWrapperNukkit;
 import team.aura_dev.aurasudo.platform.nukkit.listener.PlayerEventListenerNukkit;
 import team.aura_dev.aurasudo.platform.nukkit.player.PlayerManagerNukkit;
 import team.aura_dev.lib.multiplatformcore.DependencyClassLoader;
@@ -45,5 +47,10 @@ public class AuraSudoNukkit extends AuraSudoBase {
   @Override
   protected void registerEventListeners() {
     server.getPluginManager().registerEvents(new PlayerEventListenerNukkit(this), plugin);
+  }
+
+  @Override
+  protected void registerCommand(BaseCommand command) {
+    server.getCommandRegistry().register(plugin, new CommandWrapperNukkit(playerManager, command));
   }
 }
