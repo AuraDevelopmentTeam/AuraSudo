@@ -11,6 +11,7 @@ public class SudoCommand extends BaseCommand {
   @Override
   public void execute(PlayerDataCommon player, String alias, List<String> arguments)
       throws CommandExecutionException {
+    if (player.isConsole()) throw new CommandExecutionException("Only players");
     if (!player.hasPermission(COMMAND)) throw new PermissionException(COMMAND);
 
     // Toggle
