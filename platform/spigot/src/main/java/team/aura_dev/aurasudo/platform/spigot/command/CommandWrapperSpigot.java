@@ -1,6 +1,5 @@
 package team.aura_dev.aurasudo.platform.spigot.command;
 
-import java.util.Arrays;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import team.aura_dev.aurasudo.api.player.PlayerManager;
@@ -28,8 +27,6 @@ public class CommandWrapperSpigot extends Command {
 
   @Override
   public boolean execute(CommandSender sender, String commandLabel, String[] args) {
-    command.execute(playerManager.fromNativePlayer(sender), commandLabel, Arrays.asList(args));
-
-    return true;
+    return command.call(playerManager.fromNativePlayer(sender), commandLabel, args);
   }
 }

@@ -3,7 +3,6 @@ package team.aura_dev.aurasudo.platform.nukkit.command;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandData;
-import java.util.Arrays;
 import team.aura_dev.aurasudo.api.player.PlayerManager;
 import team.aura_dev.aurasudo.platform.common.command.BaseCommand;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
@@ -32,8 +31,6 @@ public class CommandWrapperNukkit extends Command {
 
   @Override
   public boolean execute(CommandSender sender, String commandLabel, String[] args) {
-    command.execute(playerManager.fromNativePlayer(sender), commandLabel, Arrays.asList(args));
-
-    return true;
+    return command.call(playerManager.fromNativePlayer(sender), commandLabel, args);
   }
 }

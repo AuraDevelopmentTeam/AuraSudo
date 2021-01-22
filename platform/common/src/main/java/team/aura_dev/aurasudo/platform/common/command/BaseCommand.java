@@ -40,6 +40,30 @@ public abstract class BaseCommand {
     return aliases.toArray(new String[] {});
   }
 
-  public abstract void execute(PlayerDataCommon player, String alias, List<String> arguments)
+  public final boolean call(PlayerDataCommon player, String alias, String commandLine) {
+    return call(player, alias, commandLine.split(" "));
+  }
+
+  public final boolean call(PlayerDataCommon player, String alias, String[] arguments) {
+    return call(player, alias, Arrays.asList(arguments));
+  }
+
+  public final boolean call(PlayerDataCommon player, String alias, Collection<String> arguments) {
+    try {
+      execute(
+          player,
+          alias,
+          (arguments instanceof List) ? ((List<String>) arguments) : new ArrayList<>(arguments));
+    } catch (CommandExecutionException e) {
+      // TODO replace with player call once it exists
+      System.out.println(e.getMessageComponent());
+
+      return false;
+    }
+
+    return true;
+  }
+
+  protected abstract void execute(PlayerDataCommon player, String alias, List<String> arguments)
       throws CommandExecutionException;
 }

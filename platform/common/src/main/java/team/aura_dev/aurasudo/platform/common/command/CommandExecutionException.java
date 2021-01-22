@@ -14,4 +14,8 @@ public class CommandExecutionException extends RuntimeException {
   public CommandExecutionException(Throwable cause) {
     super(cause);
   }
+
+  public String getMessageComponent() {
+    return "Error :(";
+  }
 }

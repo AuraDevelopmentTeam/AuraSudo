@@ -1,13 +1,11 @@
 package team.aura_dev.aurasudo.platform.velocity.command;
 
-import com.velocitypowered.api.command.Command;
-import com.velocitypowered.api.command.CommandSource;
-import java.util.Arrays;
+import com.velocitypowered.api.command.RawCommand;
 import team.aura_dev.aurasudo.api.player.PlayerManager;
 import team.aura_dev.aurasudo.platform.common.command.BaseCommand;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 
-public class CommandWrapperVelocity implements Command {
+public class CommandWrapperVelocity implements RawCommand {
   protected final PlayerManagerCommon playerManager;
   protected final BaseCommand command;
 
@@ -24,9 +22,11 @@ public class CommandWrapperVelocity implements Command {
   }
 
   @Override
-  public void execute(CommandSource source, String[] args) {
+  public void execute(Invocation invocation) {
     // Sadly we don't know the alias being used, so we need to pass the base command
-    command.execute(
-        playerManager.fromNativePlayer(source), command.getBaseCommand(), Arrays.asList(args));
+    command.call(
+        playerManager.fromNativePlayer(invocation.source()),
+        invocation.alias(),
+        invocation.arguments());
   }
 }

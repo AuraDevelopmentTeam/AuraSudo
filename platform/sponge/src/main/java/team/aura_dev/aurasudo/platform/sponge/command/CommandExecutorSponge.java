@@ -32,11 +32,10 @@ public class CommandExecutorSponge implements CommandExecutor {
   @Override
   public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
     // Sadly we don't know the alias being used, so we need to pass the base command
-    command.execute(
+    if (!command.call(
         playerManager.fromNativePlayer(src),
         command.getBaseCommand(),
-        new ArrayList(args.getAll(ARGS)));
-
-    return CommandResult.success();
+        new ArrayList(args.getAll(ARGS)))) throw new CommandException(Text.of(), false);
+    else return CommandResult.success();
   }
 }

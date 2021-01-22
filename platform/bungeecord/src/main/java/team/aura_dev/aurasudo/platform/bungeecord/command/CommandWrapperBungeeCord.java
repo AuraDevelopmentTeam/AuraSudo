@@ -1,6 +1,5 @@
 package team.aura_dev.aurasudo.platform.bungeecord.command;
 
-import java.util.Arrays;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;
 import team.aura_dev.aurasudo.api.player.PlayerManager;
@@ -28,7 +27,6 @@ public class CommandWrapperBungeeCord extends Command {
   @Override
   public void execute(CommandSender sender, String[] args) {
     // Sadly we don't know the alias being used, so we need to pass the base command
-    command.execute(
-        playerManager.fromNativePlayer(sender), command.getBaseCommand(), Arrays.asList(args));
+    command.call(playerManager.fromNativePlayer(sender), command.getBaseCommand(), args);
   }
 }
