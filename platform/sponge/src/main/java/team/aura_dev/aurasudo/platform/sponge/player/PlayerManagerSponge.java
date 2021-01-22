@@ -12,7 +12,8 @@ import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 public class PlayerManagerSponge extends PlayerManagerCommon {
   @Override
   protected Optional<PlayerDataCommon> generatePlayerData(@Nonnull @NonNull UUID uuid) {
-    return Optional.of(new PlayerDataSponge(uuid));
+    return PlayerDataSponge.getPlayerFromUUID(uuid)
+        .map(player -> new PlayerDataSponge(uuid, player.getName()));
   }
 
   @Nonnull

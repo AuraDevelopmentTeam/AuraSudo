@@ -1,5 +1,6 @@
 package team.aura_dev.aurasudo.platform.sponge.player;
 
+import java.util.Optional;
 import java.util.UUID;
 import javax.annotation.Nonnull;
 import org.spongepowered.api.Sponge;
@@ -7,10 +8,6 @@ import org.spongepowered.api.entity.living.player.Player;
 import team.aura_dev.aurasudo.platform.common.player.PlayerDataCommon;
 
 public class PlayerDataSponge extends PlayerDataCommon {
-  public PlayerDataSponge(@Nonnull UUID uuid) {
-    super(uuid, getPlayerFromUUID(uuid).getName());
-  }
-
   public PlayerDataSponge(@Nonnull UUID uuid, @Nonnull String playerName) {
     super(uuid, playerName);
   }
@@ -18,10 +15,10 @@ public class PlayerDataSponge extends PlayerDataCommon {
   @Nonnull
   @Override
   public String getDisplayName() {
-    return getPlayerFromUUID(uuid).getDisplayNameData().displayName().get().toString();
+    return getPlayerFromUUID(uuid).get().getDisplayNameData().displayName().get().toString();
   }
 
-  private static Player getPlayerFromUUID(UUID uuid) {
-    return Sponge.getServer().getPlayer(uuid).get();
+  public static Optional<Player> getPlayerFromUUID(UUID uuid) {
+    return Sponge.getServer().getPlayer(uuid);
   }
 }

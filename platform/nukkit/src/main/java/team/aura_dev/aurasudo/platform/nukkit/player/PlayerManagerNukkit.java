@@ -11,7 +11,8 @@ import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 public class PlayerManagerNukkit extends PlayerManagerCommon {
   @Override
   protected Optional<PlayerDataCommon> generatePlayerData(@Nonnull @NonNull UUID uuid) {
-    return Optional.of(new PlayerDataNukkit(uuid));
+    return PlayerDataNukkit.getPlayerFromUUID(uuid)
+        .map(player -> new PlayerDataNukkit(uuid, player.getName()));
   }
 
   @Nonnull

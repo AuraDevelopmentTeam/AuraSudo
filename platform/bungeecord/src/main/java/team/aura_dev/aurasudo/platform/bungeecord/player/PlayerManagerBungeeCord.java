@@ -12,7 +12,8 @@ import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 public class PlayerManagerBungeeCord extends PlayerManagerCommon {
   @Override
   protected Optional<PlayerDataCommon> generatePlayerData(@Nonnull @NonNull UUID uuid) {
-    return Optional.of(new PlayerDataBungeeCord(uuid));
+    return Optional.ofNullable(PlayerDataBungeeCord.getPlayerFromUUID(uuid))
+        .map(player -> new PlayerDataBungeeCord(uuid, player.getName()));
   }
 
   @Nonnull

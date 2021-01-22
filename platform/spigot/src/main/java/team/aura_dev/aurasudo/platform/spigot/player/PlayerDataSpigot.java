@@ -7,10 +7,6 @@ import org.bukkit.entity.Player;
 import team.aura_dev.aurasudo.platform.common.player.PlayerDataCommon;
 
 public class PlayerDataSpigot extends PlayerDataCommon {
-  public PlayerDataSpigot(@Nonnull UUID uuid) {
-    super(uuid, getPlayerFromUUID(uuid).getName());
-  }
-
   public PlayerDataSpigot(@Nonnull UUID uuid, @Nonnull String playerName) {
     super(uuid, playerName);
   }
@@ -21,7 +17,7 @@ public class PlayerDataSpigot extends PlayerDataCommon {
     return getPlayerFromUUID(uuid).getDisplayName();
   }
 
-  private static Player getPlayerFromUUID(UUID uuid) {
+  public static Player getPlayerFromUUID(UUID uuid) {
     return Bukkit.getPlayer(uuid);
   }
 }

@@ -11,7 +11,8 @@ import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 public class PlayerManagerSpigot extends PlayerManagerCommon {
   @Override
   protected Optional<PlayerDataCommon> generatePlayerData(@Nonnull @NonNull UUID uuid) {
-    return Optional.of(new PlayerDataSpigot(uuid));
+    return Optional.ofNullable(PlayerDataSpigot.getPlayerFromUUID(uuid))
+        .map(player -> new PlayerDataSpigot(uuid, player.getName()));
   }
 
   @Nonnull

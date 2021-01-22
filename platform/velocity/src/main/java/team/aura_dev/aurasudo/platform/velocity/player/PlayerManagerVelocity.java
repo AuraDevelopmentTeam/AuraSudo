@@ -17,7 +17,7 @@ public class PlayerManagerVelocity extends PlayerManagerCommon {
 
   @Override
   protected Optional<PlayerDataCommon> generatePlayerData(@Nonnull @NonNull UUID uuid) {
-    return Optional.of(new PlayerDataCommon(uuid, server.getPlayer(uuid).get().getUsername()));
+    return server.getPlayer(uuid).map(player -> new PlayerDataCommon(uuid, player.getUsername()));
   }
 
   @Nonnull
