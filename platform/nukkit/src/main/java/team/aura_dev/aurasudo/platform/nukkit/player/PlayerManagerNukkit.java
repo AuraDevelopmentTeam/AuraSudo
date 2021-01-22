@@ -1,10 +1,12 @@
 package team.aura_dev.aurasudo.platform.nukkit.player;
 
+import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.player.Player;
 import java.util.Optional;
 import java.util.UUID;
 import javax.annotation.Nonnull;
 import lombok.NonNull;
+import team.aura_dev.aurasudo.platform.common.player.ConsolePlayerDataCommon;
 import team.aura_dev.aurasudo.platform.common.player.PlayerDataCommon;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 
@@ -18,7 +20,9 @@ public class PlayerManagerNukkit extends PlayerManagerCommon {
   @Nonnull
   @Override
   protected PlayerDataCommon generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
-    return new PlayerDataNukkit(basePlayerData.getUuid(), basePlayerData.getPlayerName());
+    return ConsolePlayerDataCommon.UUID.equals(basePlayerData.getUuid())
+        ? ConsolePlayerDataNukkit.INSTANCE
+        : new PlayerDataNukkit(basePlayerData.getUuid(), basePlayerData.getPlayerName());
   }
 
   @Override
@@ -34,9 +38,16 @@ public class PlayerManagerNukkit extends PlayerManagerCommon {
 
       uuid = nativePlayer.getServerId();
       playerName = nativePlayer.getName();
+    } else if (player instanceof ConsoleCommandSender) {
+      return BasePlayerData.CONSOLE;
     } else {
       throw new IllegalArgumentException(
-          "The passed player object (" + player + ") is not of type " + Player.class.getName());
+          "The passed player object ("
+              + player
+              + ") is not of type "
+              + Player.class.getName()
+              + " or "
+              + ConsoleCommandSender.class.getName());
     }
 
     return new BasePlayerData(uuid, playerName);

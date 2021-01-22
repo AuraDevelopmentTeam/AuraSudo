@@ -22,12 +22,6 @@ public abstract class PlayerManagerCommon implements PlayerManager {
             .build(this::generatePlayerData);
   }
 
-  protected abstract Optional<PlayerDataCommon> generatePlayerData(@Nonnull @NonNull UUID uuid);
-
-  @Nonnull
-  protected abstract PlayerDataCommon generatePlayerData(
-      @Nonnull @NonNull BasePlayerData basePlayerData);
-
   @SuppressFBWarnings(
       value = "NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE",
       justification = "SpotBugs is incorrect in this case")
@@ -79,8 +73,17 @@ public abstract class PlayerManagerCommon implements PlayerManager {
   protected abstract BasePlayerData nativePlayerToBasePlayerData(@Nonnull Object player)
       throws IllegalArgumentException;
 
+  protected abstract Optional<PlayerDataCommon> generatePlayerData(@Nonnull @NonNull UUID uuid);
+
+  @Nonnull
+  protected abstract PlayerDataCommon generatePlayerData(
+      @Nonnull @NonNull BasePlayerData basePlayerData);
+
   @Data
   public static class BasePlayerData {
+    public static final BasePlayerData CONSOLE =
+        new BasePlayerData(ConsolePlayerDataCommon.UUID, ConsolePlayerDataCommon.NAME);
+
     @NonNull private final UUID uuid;
     @NonNull private final String playerName;
   }

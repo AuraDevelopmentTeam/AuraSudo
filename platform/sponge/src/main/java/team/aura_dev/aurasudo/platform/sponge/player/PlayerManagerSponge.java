@@ -4,8 +4,10 @@ import java.util.Optional;
 import java.util.UUID;
 import javax.annotation.Nonnull;
 import lombok.NonNull;
+import org.spongepowered.api.command.source.ConsoleSource;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.profile.GameProfile;
+import team.aura_dev.aurasudo.platform.common.player.ConsolePlayerDataCommon;
 import team.aura_dev.aurasudo.platform.common.player.PlayerDataCommon;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 
@@ -19,7 +21,9 @@ public class PlayerManagerSponge extends PlayerManagerCommon {
   @Nonnull
   @Override
   protected PlayerDataCommon generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
-    return new PlayerDataSponge(basePlayerData.getUuid(), basePlayerData.getPlayerName());
+    return ConsolePlayerDataCommon.UUID.equals(basePlayerData.getUuid())
+        ? ConsolePlayerDataSponge.INSTANCE
+        : new PlayerDataSponge(basePlayerData.getUuid(), basePlayerData.getPlayerName());
   }
 
   @Override
@@ -40,14 +44,18 @@ public class PlayerManagerSponge extends PlayerManagerCommon {
 
       uuid = nativePlayer.getUniqueId();
       playerName = nativePlayer.getName().get();
+    } else if (player instanceof ConsoleSource) {
+      return BasePlayerData.CONSOLE;
     } else {
       throw new IllegalArgumentException(
           "The passed player object ("
               + player
               + ") is not of type "
               + Player.class.getName()
+              + ", "
+              + GameProfile.class.getName()
               + " or "
-              + GameProfile.class.getName());
+              + ConsoleSource.class.getName());
     }
 
     return new BasePlayerData(uuid, playerName);

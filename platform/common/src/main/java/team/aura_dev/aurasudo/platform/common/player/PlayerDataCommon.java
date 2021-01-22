@@ -55,6 +55,10 @@ public class PlayerDataCommon implements PlayerData {
     this.sudoLevel = sudoLevel;
   }
 
+  public boolean isConsole() {
+    return false;
+  }
+
   public boolean hasPermission(Permission permission) {
     final User user = luckPerms.getUserManager().getUser(uuid);
 

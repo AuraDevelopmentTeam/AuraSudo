@@ -4,7 +4,9 @@ import java.util.Optional;
 import java.util.UUID;
 import javax.annotation.Nonnull;
 import lombok.NonNull;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import team.aura_dev.aurasudo.platform.common.player.ConsolePlayerDataCommon;
 import team.aura_dev.aurasudo.platform.common.player.PlayerDataCommon;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 
@@ -18,7 +20,9 @@ public class PlayerManagerSpigot extends PlayerManagerCommon {
   @Nonnull
   @Override
   protected PlayerDataCommon generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
-    return new PlayerDataSpigot(basePlayerData.getUuid(), basePlayerData.getPlayerName());
+    return ConsolePlayerDataCommon.UUID.equals(basePlayerData.getUuid())
+        ? ConsolePlayerDataSpigot.INSTANCE
+        : new PlayerDataSpigot(basePlayerData.getUuid(), basePlayerData.getPlayerName());
   }
 
   @Override
@@ -34,9 +38,16 @@ public class PlayerManagerSpigot extends PlayerManagerCommon {
 
       uuid = nativePlayer.getUniqueId();
       playerName = nativePlayer.getName();
+    } else if (player instanceof ConsoleCommandSender) {
+      return BasePlayerData.CONSOLE;
     } else {
       throw new IllegalArgumentException(
-          "The passed player object (" + player + ") is not of type " + Player.class.getName());
+          "The passed player object ("
+              + player
+              + ") is not of type "
+              + Player.class.getName()
+              + " or "
+              + ConsoleCommandSender.class.getName());
     }
 
     return new BasePlayerData(uuid, playerName);
