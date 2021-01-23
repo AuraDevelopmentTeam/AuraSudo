@@ -1,6 +1,7 @@
 package team.aura_dev.aurasudo.platform.velocity;
 
 import com.velocitypowered.api.proxy.ProxyServer;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.nio.file.Path;
 import team.aura_dev.aurasudo.api.AuraSudo;
 import team.aura_dev.aurasudo.platform.common.AuraSudoBase;
@@ -15,6 +16,10 @@ public class AuraSudoVelocity extends AuraSudoBase {
   private final AuraSudoVelocityBootstrap plugin;
   private static ProxyServer server;
 
+  @SuppressFBWarnings(
+      value = "ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD",
+      justification =
+          "Since we only call the constructor on our own terms there are no issues here")
   public AuraSudoVelocity(
       DependencyClassLoader classLoader,
       AuraSudoVelocityBootstrap plugin,

@@ -48,8 +48,8 @@ public class RuntimeDependencies {
               "net.kyori",
               "adventure-text-serializer-legacy",
               "4.4.0",
-              "91d46a5acfbcc03e1e00165978640088",
-              "1733a77bbdf535351bcfe96a0c42b3a89f87e872")
+              "771fee269487d47767b3e7ceffd90ebe",
+              "32491aff8ebf684e2a8cf28c60295a44410cf15a")
           .transitive()
           .exclusion("org.jetbrains:annotations")
           .build();

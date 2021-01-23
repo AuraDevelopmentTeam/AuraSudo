@@ -12,11 +12,8 @@ public class PermissionException extends CommandExecutionException {
   }
 
   public PermissionException(@Nullable Permission permission) {
-    this.permission = permission;
-  }
+    super("No permissions ;(");
 
-  @Override
-  public String getMessageComponent() {
-    return "No permissions ;(";
+    this.permission = permission;
   }
 }

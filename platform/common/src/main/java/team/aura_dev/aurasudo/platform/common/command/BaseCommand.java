@@ -50,13 +50,12 @@ public abstract class BaseCommand {
 
   public final boolean call(PlayerDataCommon player, String alias, Collection<String> arguments) {
     try {
-      execute(
-          player,
-          alias,
-          (arguments instanceof List) ? ((List<String>) arguments) : new ArrayList<>(arguments));
+      final List<String> argumentList =
+          (arguments instanceof List) ? ((List<String>) arguments) : new ArrayList<>(arguments);
+
+      execute(player, alias, argumentList);
     } catch (CommandExecutionException e) {
-      // TODO replace with player call once it exists
-      System.out.println(e.getMessageComponent());
+      player.sendMessage(e.getMessageComponent());
 
       return false;
     }
