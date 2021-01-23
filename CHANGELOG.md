@@ -1,3 +1,12 @@
+Version 0.1.0
+-------------
+
+\* Properly handled lacking permissions.  
+\* Error handling.  
+\* Sending messages to players.  
+\* Reading the config.  
+
+
 Version 0.0.1
 -------------
 
