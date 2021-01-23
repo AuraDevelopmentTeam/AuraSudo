@@ -19,7 +19,7 @@ public class PlayerManagerVelocity extends PlayerManagerCommon {
 
   @Override
   protected Optional<PlayerDataCommon> generatePlayerData(@Nonnull @NonNull UUID uuid) {
-    return server.getPlayer(uuid).map(player -> new PlayerDataCommon(uuid, player.getUsername()));
+    return server.getPlayer(uuid).map(player -> new PlayerDataVelocity(uuid, player.getUsername()));
   }
 
   @Nonnull
@@ -27,7 +27,7 @@ public class PlayerManagerVelocity extends PlayerManagerCommon {
   protected PlayerDataCommon generatePlayerData(@Nonnull @NonNull BasePlayerData basePlayerData) {
     return ConsolePlayerDataCommon.UUID.equals(basePlayerData.getUuid())
         ? ConsolePlayerDataVelocity.INSTANCE
-        : new PlayerDataCommon(basePlayerData.getUuid(), basePlayerData.getPlayerName());
+        : new PlayerDataVelocity(basePlayerData.getUuid(), basePlayerData.getPlayerName());
   }
 
   @Override

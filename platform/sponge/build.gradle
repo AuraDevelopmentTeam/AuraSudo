@@ -9,6 +9,8 @@ dependencies {
     shadow(project(":AuraSudo-common")) {
         transitive = false
     }
+
+    implementation "net.kyori:adventure-text-serializer-gson:${project(":AuraSudo-common").adventure_version}"
 }
 
 shadowJar {

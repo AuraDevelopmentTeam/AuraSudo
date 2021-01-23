@@ -81,6 +81,9 @@ public abstract class AuraSudoBase implements AuraSudoApi, AuraSudoBaseBootstrap
   public DependencyList getDependencies(DependencyList dependencyList) {
     // We need caffeine as a loading cache in several classes
     dependencyList.add(RuntimeDependencies.CAFFEINE);
+    // For basic text parsing
+    dependencyList.addIfClassMissing(
+        RuntimeDependencies.ADVENTURE_LEGACY, "net.kyori.adventure.text.TextComponent");
 
     // Don't load platform dependencies at all
     getPlatformDependencies().forEach(dependencyList::deny);

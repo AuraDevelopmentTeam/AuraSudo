@@ -13,7 +13,7 @@ import team.aura_dev.lib.multiplatformcore.DependencyClassLoader;
 
 public class AuraSudoVelocity extends AuraSudoBase {
   private final AuraSudoVelocityBootstrap plugin;
-  private final ProxyServer server;
+  private static ProxyServer server;
 
   public AuraSudoVelocity(
       DependencyClassLoader classLoader,
@@ -23,7 +23,7 @@ public class AuraSudoVelocity extends AuraSudoBase {
     super(classLoader, configDir);
 
     this.plugin = plugin;
-    this.server = server;
+    AuraSudoVelocity.server = server;
 
     // Instance is initialized
     AuraSudo.setApi(this);
@@ -57,5 +57,9 @@ public class AuraSudoVelocity extends AuraSudoBase {
             command.getBaseCommand(),
             new CommandWrapperVelocity(playerManager, command),
             command.getAliasesAsArray());
+  }
+
+  public static ProxyServer getServer() {
+    return server;
   }
 }

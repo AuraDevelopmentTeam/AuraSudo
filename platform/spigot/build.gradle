@@ -16,6 +16,8 @@ dependencies {
         transitive = false
     }
 
+    implementation "net.kyori:adventure-text-serializer-gson:${project(":AuraSudo-common").adventure_version}"
+
     // SLF4J files
     slf4j "org.slf4j:slf4j-api:${project(":AuraSudo-common").slf4j_version}"
     slf4j "team.aura_dev.lib.slf4j-plugin.spigot:slf4j-plugin-spigot:${project(":AuraSudo-common").slf4jPlugin_version}:${project(":AuraSudo-common").slf4j_version}"

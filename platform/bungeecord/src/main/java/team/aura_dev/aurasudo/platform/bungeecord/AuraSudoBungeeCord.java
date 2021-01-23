@@ -8,8 +8,10 @@ import team.aura_dev.aurasudo.platform.bungeecord.listener.PlayerEventListenerBu
 import team.aura_dev.aurasudo.platform.bungeecord.player.PlayerManagerBungeeCord;
 import team.aura_dev.aurasudo.platform.common.AuraSudoBase;
 import team.aura_dev.aurasudo.platform.common.command.BaseCommand;
+import team.aura_dev.aurasudo.platform.common.dependency.RuntimeDependencies;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
 import team.aura_dev.lib.multiplatformcore.DependencyClassLoader;
+import team.aura_dev.lib.multiplatformcore.download.DependencyList;
 
 public class AuraSudoBungeeCord extends AuraSudoBase {
   private final AuraSudoBungeeCordBootstrap plugin;
@@ -37,6 +39,15 @@ public class AuraSudoBungeeCord extends AuraSudoBase {
   @Override
   public String getPlatformVariant() {
     return server.getName();
+  }
+
+  @Override
+  public DependencyList getDependencies(DependencyList dependencyList) {
+    dependencyList.addIfClassMissing(
+        RuntimeDependencies.ADVENTURE_JSON,
+        "net.kyori.adventure.text.serializer.gson.GsonComponentSerializer");
+
+    return super.getDependencies(dependencyList);
   }
 
   @Override

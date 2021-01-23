@@ -17,6 +17,7 @@ import team.aura_dev.aurasudo.platform.sponge.listener.PlayerEventListenerSponge
 import team.aura_dev.aurasudo.platform.sponge.player.PlayerManagerSponge;
 import team.aura_dev.lib.multiplatformcore.DependencyClassLoader;
 import team.aura_dev.lib.multiplatformcore.dependency.RuntimeDependency;
+import team.aura_dev.lib.multiplatformcore.download.DependencyList;
 
 public class AuraSudoSponge extends AuraSudoBase {
   private final AuraSudoSpongeBootstrap plugin;
@@ -39,6 +40,15 @@ public class AuraSudoSponge extends AuraSudoBase {
   @Override
   public String getPlatformVariant() {
     return Sponge.getPlatform().getContainer(Platform.Component.IMPLEMENTATION).getName();
+  }
+
+  @Override
+  public DependencyList getDependencies(DependencyList dependencyList) {
+    dependencyList.addIfClassMissing(
+        RuntimeDependencies.ADVENTURE_JSON,
+        "net.kyori.adventure.text.serializer.gson.GsonComponentSerializer");
+
+    return super.getDependencies(dependencyList);
   }
 
   @Override

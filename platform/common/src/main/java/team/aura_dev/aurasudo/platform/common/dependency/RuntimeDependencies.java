@@ -7,6 +7,12 @@ import team.aura_dev.lib.multiplatformcore.dependency.RuntimeDependency.Maven;
 @UtilityClass
 public class RuntimeDependencies {
   ////////////////////////////////////////////////////////
+  // Additional repos
+  ////////////////////////////////////////////////////////
+  //  private static final Maven OSS_SNAPSHOTS =
+  //      new Maven("https://oss.sonatype.org/content/repositories/snapshots");
+
+  ////////////////////////////////////////////////////////
   // Config
   ////////////////////////////////////////////////////////
   public static final RuntimeDependency CONFIGURATE_HOCON =
@@ -21,9 +27,31 @@ public class RuntimeDependencies {
           .exclusion("com.google.code.findbugs:jsr305")
           .exclusion("com.google.errorprone:error_prone_annotations")
           .exclusion("com.google.j2objc:j2objc-annotations")
-          // org.codehaus.mojo gets relocated. That's why we need to make sure we don't have a
-          // literal "org.codehaus.mojo" in any strings
-          .exclusion("org.Codehaus.mojo:animal-sniffer-annotations".toLowerCase())
+          .exclusion("org.codehaus.mojo:animal-sniffer-annotations")
+          .build();
+
+  ////////////////////////////////////////////////////////
+  // Adventure (text library)
+  ////////////////////////////////////////////////////////
+  public static final RuntimeDependency ADVENTURE_JSON =
+      RuntimeDependency.builder(
+              "net.kyori",
+              "adventure-text-serializer-gson",
+              "4.4.0",
+              "6913a7722334447e9edce6a55c94c4ef",
+              "0c1cf5b0a0c2e25675a1fb91d089be44dee45e5d")
+          .transitive()
+          .exclusion("org.jetbrains:annotations")
+          .build();
+  public static final RuntimeDependency ADVENTURE_LEGACY =
+      RuntimeDependency.builder(
+              "net.kyori",
+              "adventure-text-serializer-legacy",
+              "4.4.0",
+              "91d46a5acfbcc03e1e00165978640088",
+              "1733a77bbdf535351bcfe96a0c42b3a89f87e872")
+          .transitive()
+          .exclusion("org.jetbrains:annotations")
           .build();
 
   ////////////////////////////////////////////////////////

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
+import net.kyori.adventure.text.TextComponent;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
@@ -26,7 +27,7 @@ import team.aura_dev.aurasudo.platform.common.permission.Permission;
 @Data
 @Getter(onMethod = @__({@Nonnull}))
 @EqualsAndHashCode(of = "uuid")
-public class PlayerDataCommon implements PlayerData {
+public abstract class PlayerDataCommon implements PlayerData {
   protected final LuckPerms luckPerms = LuckPermsProvider.get();
 
   @NonNull protected final UUID uuid;
@@ -70,4 +71,6 @@ public class PlayerDataCommon implements PlayerData {
         .checkPermission(permission.getPermission())
         .asBoolean();
   }
+
+  public abstract void sendMessage(TextComponent message);
 }
