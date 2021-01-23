@@ -6,10 +6,14 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import lombok.Getter;
+import org.slf4j.Logger;
+import team.aura_dev.aurasudo.platform.common.AuraSudoBase;
 import team.aura_dev.aurasudo.platform.common.permission.Permission;
 import team.aura_dev.aurasudo.platform.common.player.PlayerDataCommon;
 
 public abstract class BaseCommand {
+  protected static final Logger logger = AuraSudoBase.logger;
+
   public final Permission BASE;
   public final Permission COMMAND;
 
@@ -60,6 +64,14 @@ public abstract class BaseCommand {
 
         execute(player, alias, argumentList);
       } catch (RuntimeException e) {
+        logger.warn(
+            "Unexpected Exception during command execution of /"
+                + alias
+                + " (/@id@:"
+                + getBaseCommand()
+                + "):",
+            e);
+
         throw new CommandExecutionException(e);
       }
     } catch (CommandExecutionException e) {
