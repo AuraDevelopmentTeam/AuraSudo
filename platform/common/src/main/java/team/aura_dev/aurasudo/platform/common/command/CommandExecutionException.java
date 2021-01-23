@@ -6,7 +6,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
 
-public class CommandExecutionException extends RuntimeException {
+public class CommandExecutionException extends Exception {
   private final TextComponent message;
 
   public CommandExecutionException() {

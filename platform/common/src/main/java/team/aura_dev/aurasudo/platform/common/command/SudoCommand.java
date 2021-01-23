@@ -13,10 +13,11 @@ public class SudoCommand extends BaseCommand {
   @Override
   public void execute(PlayerDataCommon player, String alias, List<String> arguments)
       throws CommandExecutionException {
-    if (player.isConsole()) throw new CommandExecutionException("This command can only be executed by players!");
+    if (player.isConsole())
+      throw new CommandExecutionException("This command can only be executed by players!");
     if (!player.hasPermission(COMMAND)) throw new PermissionException(COMMAND);
 
-    if(player.getSudoLevel() == 0) {
+    if (player.getSudoLevel() == 0) {
       player.setSudoLevel(1);
 
       player.sendMessage(Component.text("Enabled sudo mode", NamedTextColor.GREEN));
