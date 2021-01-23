@@ -15,6 +15,10 @@ public abstract class BaseCommand {
 
   @Getter protected final LinkedHashSet<String> aliases;
 
+  public BaseCommand(Collection<String> aliases) {
+    this(aliases.isEmpty() ? null : aliases.iterator().next(), aliases);
+  }
+
   public BaseCommand(String baseCommand, String... aliases) {
     this(baseCommand, Arrays.asList(aliases));
   }

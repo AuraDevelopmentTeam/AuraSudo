@@ -154,8 +154,8 @@ public abstract class AuraSudoBase implements AuraSudoApi, AuraSudoBaseBootstrap
         .getContextManager()
         .registerCalculator(new SudoContextCalculator(playerManager, getMaxSudoLevel()));
 
-    logger.info("Registering Context with LuckPerms");
-    registerCommand(new SudoCommand());
+    logger.info("Registering Commands");
+    registerCommand(new SudoCommand(configLoader.getConfig().getCommand().getSudo().getAliases()));
 
     // TODO
   }
@@ -163,7 +163,7 @@ public abstract class AuraSudoBase implements AuraSudoApi, AuraSudoBaseBootstrap
   @Override
   public int getMaxSudoLevel() {
     // TODO: Read from config
-    return 2;
+    return 1;
   }
 
   // Private helper methods
