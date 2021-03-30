@@ -54,6 +54,9 @@ public abstract class PlayerDataCommon implements PlayerData {
           "sudoLevel was " + sudoLevel + ". But must be between 0 and " + maxSudoLevel);
 
     this.sudoLevel = sudoLevel;
+
+    // Inform LP about the change
+    luckPerms.getContextManager().signalContextUpdate(uuid);
   }
 
   public boolean isConsole() {
