@@ -17,19 +17,20 @@ public class PlayerDataSpigot extends PlayerDataCommon {
   @Nonnull
   @Override
   public String getDisplayName() {
-    return getPlayer().getDisplayName();
+    return getNativePlayer().getDisplayName();
   }
 
   @Override
   public void sendMessage(TextComponent message) {
     // TODO: Replace with platform implementation as soon as a solution to the SNAPSHOT issue is
     // available
-    getPlayer()
+    getNativePlayer()
         .spigot()
         .sendMessage(ComponentSerializer.parse(GsonComponentSerializer.gson().serialize(message)));
   }
 
-  private Player getPlayer() {
+  @Override
+  protected Player getNativePlayer() {
     return getPlayerFromUUID(uuid);
   }
 

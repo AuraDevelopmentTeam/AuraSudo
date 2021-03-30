@@ -18,19 +18,19 @@ public class PlayerDataSponge extends PlayerDataCommon {
   @Nonnull
   @Override
   public String getDisplayName() {
-    return getPlayer().get().getDisplayNameData().displayName().get().toString();
+    return getNativePlayer().getDisplayNameData().displayName().get().toString();
   }
 
   @Override
   public void sendMessage(TextComponent message) {
-    getPlayer()
-        .get()
+    getNativePlayer()
         .sendMessage(
             TextSerializers.JSON.deserialize(GsonComponentSerializer.gson().serialize(message)));
   }
 
-  private Optional<Player> getPlayer() {
-    return getPlayerFromUUID(uuid);
+  @Override
+  protected Player getNativePlayer() {
+    return getPlayerFromUUID(uuid).get();
   }
 
   public static Optional<Player> getPlayerFromUUID(UUID uuid) {

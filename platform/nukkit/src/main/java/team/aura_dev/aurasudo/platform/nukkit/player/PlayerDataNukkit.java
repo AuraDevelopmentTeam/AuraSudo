@@ -17,16 +17,17 @@ public class PlayerDataNukkit extends PlayerDataCommon {
   @Nonnull
   @Override
   public String getDisplayName() {
-    return getPlayer().get().getDisplayName();
+    return getNativePlayer().getDisplayName();
   }
 
   @Override
   public void sendMessage(TextComponent message) {
-    getPlayer().get().sendMessage(LegacyComponentSerializer.legacySection().serialize(message));
+    getNativePlayer().sendMessage(LegacyComponentSerializer.legacySection().serialize(message));
   }
 
-  private Optional<Player> getPlayer() {
-    return getPlayerFromUUID(uuid);
+  @Override
+  protected Player getNativePlayer() {
+    return getPlayerFromUUID(uuid).get();
   }
 
   public static Optional<Player> getPlayerFromUUID(UUID uuid) {

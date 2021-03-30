@@ -21,4 +21,9 @@ public class ConsolePlayerDataSponge extends ConsolePlayerDataCommon {
     console.sendMessage(
         TextSerializers.JSON.deserialize(GsonComponentSerializer.gson().serialize(message)));
   }
+
+  @Override
+  protected Object getNativePlayer() {
+    return console;
+  }
 }

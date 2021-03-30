@@ -15,11 +15,12 @@ public class PlayerDataVelocity extends PlayerDataCommon {
 
   @Override
   public void sendMessage(TextComponent message) {
-    getPlayer().get().sendMessage(message);
+    getNativePlayer().sendMessage(message);
   }
 
-  private Optional<Player> getPlayer() {
-    return getPlayerFromUUID(uuid);
+  @Override
+  protected Player getNativePlayer() {
+    return getPlayerFromUUID(uuid).get();
   }
 
   public static Optional<Player> getPlayerFromUUID(UUID uuid) {

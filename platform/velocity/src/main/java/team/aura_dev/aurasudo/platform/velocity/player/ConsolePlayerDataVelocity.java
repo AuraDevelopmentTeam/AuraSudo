@@ -19,4 +19,9 @@ public class ConsolePlayerDataVelocity extends ConsolePlayerDataCommon {
   public void sendMessage(TextComponent message) {
     console.sendMessage(message);
   }
+
+  @Override
+  protected Object getNativePlayer() {
+    return console;
+  }
 }

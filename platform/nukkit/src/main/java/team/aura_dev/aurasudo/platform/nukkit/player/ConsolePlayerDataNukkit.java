@@ -19,4 +19,9 @@ public class ConsolePlayerDataNukkit extends ConsolePlayerDataCommon {
   public void sendMessage(TextComponent message) {
     console.sendMessage(LegacyComponentSerializer.legacySection().serialize(message));
   }
+
+  @Override
+  protected Object getNativePlayer() {
+    return console;
+  }
 }

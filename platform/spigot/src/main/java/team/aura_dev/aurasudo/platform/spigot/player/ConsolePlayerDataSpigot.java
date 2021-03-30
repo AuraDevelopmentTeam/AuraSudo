@@ -21,4 +21,9 @@ public class ConsolePlayerDataSpigot extends ConsolePlayerDataCommon {
     console.sendMessage(
         ComponentSerializer.parse(GsonComponentSerializer.gson().serialize(message)));
   }
+
+  @Override
+  protected Object getNativePlayer() {
+    return console;
+  }
 }

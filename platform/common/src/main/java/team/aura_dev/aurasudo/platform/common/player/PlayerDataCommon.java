@@ -56,7 +56,7 @@ public abstract class PlayerDataCommon implements PlayerData {
     this.sudoLevel = sudoLevel;
 
     // Inform LP about the change
-    luckPerms.getContextManager().signalContextUpdate(uuid);
+    luckPerms.getContextManager().signalContextUpdate(getNativePlayer());
   }
 
   public boolean isConsole() {
@@ -76,4 +76,6 @@ public abstract class PlayerDataCommon implements PlayerData {
   }
 
   public abstract void sendMessage(TextComponent message);
+
+  protected abstract Object getNativePlayer();
 }
