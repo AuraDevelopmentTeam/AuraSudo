@@ -1,3 +1,10 @@
+Version 0.1.1
+-------------
+
+\* Sending an event when the context changes.  
+\* Setting the API version for Spigot.  
+
+
 Version 0.1.0
 -------------
 
