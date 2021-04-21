@@ -1,6 +1,7 @@
 package team.aura_dev.aurasudo.platform.common.player;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.util.Optional;
 import java.util.UUID;
 import javax.annotation.Nonnull;
 import lombok.Data;
@@ -13,6 +14,7 @@ import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
 import team.aura_dev.aurasudo.api.AuraSudo;
 import team.aura_dev.aurasudo.api.player.PlayerData;
+import team.aura_dev.aurasudo.platform.common.AuraSudoBase;
 import team.aura_dev.aurasudo.platform.common.permission.Permission;
 
 /**
@@ -64,18 +66,28 @@ public abstract class PlayerDataCommon implements PlayerData {
   }
 
   public boolean hasPermission(Permission permission) {
-    final User user = luckPerms.getUserManager().getUser(uuid);
-
-    // Shouldn't happen, but let's essentially just ignore this instead of throwing exceptions
-    if (user == null) return false;
-
-    return user.getCachedData()
-        .getPermissionData()
-        .checkPermission(permission.getPermission())
-        .asBoolean();
+    return getLuckPermsUser()
+        .map(
+            user ->
+                user.getCachedData()
+                    .getPermissionData()
+                    .checkPermission(permission.getPermission())
+                    .asBoolean())
+        .orElse(false);
   }
 
   public abstract void sendMessage(TextComponent message);
 
   protected abstract Object getNativePlayer();
+
+  protected final Optional<User> getLuckPermsUser() {
+    final User user = luckPerms.getUserManager().getUser(uuid);
+
+    // Shouldn't happen
+    if (user == null) {
+      AuraSudoBase.logger.warn("LuckPerms had no data loaded for UUID " + uuid);
+    }
+
+    return Optional.ofNullable(user);
+  }
 }
