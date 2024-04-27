@@ -1,0 +1,6 @@
+package team.aura_dev.aurasudo.platform.sponge.bootstrap;
+
+import team.aura_dev.aurasudo.platform.common.bootstrap.AuraSudoBootstrapper;
+
+/** This class exists, so that AuraSudoBootstrapper can automatically detect the right package */
+public class AuraSudoSpongeBootstrapper extends AuraSudoBootstrapper {}

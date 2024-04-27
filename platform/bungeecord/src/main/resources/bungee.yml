@@ -1,6 +1,6 @@
 name: ${name}
 id: ${id}
-main: ${group}.platform.bungeecord.AuraSudoBungeeCordBootstrap
+main: ${group}.platform.bungeecord.bootstrap.AuraSudoBungeeCordBootstrap
 version: ${version}
 author: BrainStone
 description: ${description}

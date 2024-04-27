@@ -1,6 +1,6 @@
 name: ${name}
 id: ${id}
-main: ${group}.platform.spigot.AuraSudoSpigotBootstrap
+main: ${group}.platform.spigot.bootstrap.AuraSudoSpigotBootstrap
 version: ${version}
 api-version: 1.16
 author: BrainStone

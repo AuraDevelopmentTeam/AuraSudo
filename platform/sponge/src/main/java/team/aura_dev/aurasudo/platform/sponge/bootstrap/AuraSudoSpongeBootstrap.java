@@ -1,4 +1,4 @@
-package team.aura_dev.aurasudo.platform.sponge;
+package team.aura_dev.aurasudo.platform.sponge.bootstrap;
 
 import com.google.inject.Inject;
 import java.nio.file.Path;
@@ -8,8 +8,8 @@ import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.plugin.Dependency;
 import org.spongepowered.api.plugin.Plugin;
-import team.aura_dev.aurasudo.platform.common.AuraSudoBaseBootstrap;
-import team.aura_dev.aurasudo.platform.common.AuraSudoBootstrapper;
+import team.aura_dev.aurasudo.platform.common.bootstrap.AuraSudoBaseBootstrap;
+import team.aura_dev.aurasudo.platform.common.bootstrap.AuraSudoBootstrapper;
 
 @Plugin(
     id = AuraSudoBootstrapper.ID,
@@ -24,7 +24,7 @@ public class AuraSudoSpongeBootstrap {
 
   @Inject
   public AuraSudoSpongeBootstrap(@ConfigDir(sharedRoot = false) Path configDir) {
-    final AuraSudoBootstrapper bootstrapper = new AuraSudoBootstrapper();
+    final AuraSudoBootstrapper bootstrapper = new AuraSudoSpongeBootstrapper();
     bootstrapper.initializePlugin(this, configDir);
 
     bootstrappedPlugin = bootstrapper.getPlugin();

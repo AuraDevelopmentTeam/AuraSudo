@@ -1,6 +1,6 @@
 name: ${name}
 id: ${id}
-main: ${group}.platform.nukkit.AuraSudoNukkitBootstrap
+main: ${group}.platform.nukkit.bootstrap.AuraSudoNukkitBootstrap
 version: ${version}
 author: BrainStone
 description: ${description}

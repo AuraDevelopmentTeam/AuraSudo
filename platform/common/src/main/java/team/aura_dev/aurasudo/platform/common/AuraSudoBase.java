@@ -12,6 +12,7 @@ import net.luckperms.api.LuckPermsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import team.aura_dev.aurasudo.api.AuraSudoApi;
+import team.aura_dev.aurasudo.platform.common.bootstrap.AuraSudoBaseBootstrap;
 import team.aura_dev.aurasudo.platform.common.command.BaseCommand;
 import team.aura_dev.aurasudo.platform.common.command.SudoCommand;
 import team.aura_dev.aurasudo.platform.common.config.ConfigLoader;
@@ -93,7 +94,7 @@ public abstract class AuraSudoBase implements AuraSudoApi, AuraSudoBaseBootstrap
 
   /**
    * A list of dependencies that are on the platform and therefore need not be loaded.<br>
-   * By default this list is empty.
+   * By default, this list is empty.
    *
    * @return A list of dependencies present on the platform
    */

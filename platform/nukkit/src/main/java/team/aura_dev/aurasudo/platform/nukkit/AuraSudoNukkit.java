@@ -6,6 +6,7 @@ import team.aura_dev.aurasudo.api.AuraSudo;
 import team.aura_dev.aurasudo.platform.common.AuraSudoBase;
 import team.aura_dev.aurasudo.platform.common.command.BaseCommand;
 import team.aura_dev.aurasudo.platform.common.player.PlayerManagerCommon;
+import team.aura_dev.aurasudo.platform.nukkit.bootstrap.AuraSudoNukkitBootstrap;
 import team.aura_dev.aurasudo.platform.nukkit.command.CommandWrapperNukkit;
 import team.aura_dev.aurasudo.platform.nukkit.listener.PlayerEventListenerNukkit;
 import team.aura_dev.aurasudo.platform.nukkit.player.PlayerManagerNukkit;
