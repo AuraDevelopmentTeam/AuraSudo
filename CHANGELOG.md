@@ -1,3 +1,9 @@
+Version 0.1.2
+-------------
+
+\* Make the plugin work without reflective access.  
+
+
 Version 0.1.1
 -------------
 
