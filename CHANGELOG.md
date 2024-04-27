@@ -1,6 +1,12 @@
 Version 0.1.2
 -------------
 
+\* Got rid of download warnings.  
+
+
+Version 0.1.2
+-------------
+
 \* Make the plugin work without reflective access.  
 
 

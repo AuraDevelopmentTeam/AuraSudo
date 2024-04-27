@@ -26,6 +26,7 @@ public class RuntimeDependencies {
           .exclusion("com.google.errorprone:error_prone_annotations")
           .exclusion("com.google.j2objc:j2objc-annotations")
           .exclusion("org.codehaus.mojo:animal-sniffer-annotations")
+          .exclusion("com.google.inject:guice")
           .build();
 
   ////////////////////////////////////////////////////////
