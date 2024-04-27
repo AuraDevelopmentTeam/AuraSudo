@@ -2,6 +2,7 @@ Version 0.1.2
 -------------
 
 \* Got rid of download warnings.  
+\* Removed debug output.  
 
 
 Version 0.1.2

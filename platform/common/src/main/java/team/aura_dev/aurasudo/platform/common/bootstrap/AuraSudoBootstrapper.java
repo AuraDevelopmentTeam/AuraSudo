@@ -1,7 +1,6 @@
 package team.aura_dev.aurasudo.platform.common.bootstrap;
 
 import java.nio.file.Path;
-import java.util.Arrays;
 import team.aura_dev.lib.multiplatformcore.bootstrap.MultiProjectSLF4JBootstrapper;
 
 public class AuraSudoBootstrapper extends MultiProjectSLF4JBootstrapper<AuraSudoBaseBootstrap> {
@@ -18,16 +17,11 @@ public class AuraSudoBootstrapper extends MultiProjectSLF4JBootstrapper<AuraSudo
 
   @Override
   protected String[] getExcludedPackages() {
-    String[] packages =
-        new String[] {
-          "@group@.api", // API package. The API isn't platform specific
-          AuraSudoBootstrapper.class.getPackage().getName(), // Path for the common platform
-          getPackageName() + ".bootstrap", // Path for the running platform
-        };
-
-    System.out.println(Arrays.toString(packages));
-
-    return packages;
+    return new String[] {
+      "@group@.api", // API package. The API isn't platform specific
+      AuraSudoBootstrapper.class.getPackage().getName(), // Path for the common platform
+      getPackageName() + ".bootstrap", // Path for the running platform
+    };
   }
 
   /**
