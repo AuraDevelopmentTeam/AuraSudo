@@ -104,7 +104,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: success() || failure()
         with:
-          name: "${{ env.ref }}_code-checks_${{ matrix.os }}"
+          name: ${{ env.ref }}_code-checks_${{ matrix.os }}
           path: |
             **/build/test-results/test/TEST-*.xml
             **/build/reports/spotbugs/*.xml
